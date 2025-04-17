@@ -1,4 +1,4 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+This is a [Next.js](https://nextjs.org) project bootstrapped with `create-next-app`.
 
 ## Getting Started
 
@@ -14,11 +14,16 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open <http://localhost:3000> with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This project uses `next/font` to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+
+## Pre-requisite:
+
+Ollama should be installed on your computer to run this project.\
+ In this project I am using google's open-source AI model called `gemma3:1b` though you can use any other model offered by Ollama. Make sure to pull the model from Ollama: [Ollama Docs](https://ollama.com/library)
 
 ## Learn More
 
