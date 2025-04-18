@@ -1,7 +1,9 @@
 "use client";
 
+import Issues from "@/components/issues";
 import { Markdown } from "@/components/markdown";
 import MessageTypeIndicator from "@/components/message-type-indicator";
+import WeatherBlock from "@/components/weather-block";
 import { useChat } from "@ai-sdk/react";
 
 export default function Chat() {
@@ -12,18 +14,29 @@ export default function Chat() {
         <div key={message.id} className="whitespace-pre-wrap space-y-2">
           <MessageTypeIndicator role={message.role} />
           <div className="space-y-2">
-            {message.parts.map((part, i) => {
-              switch (part.type) {
-                case "text":
-                  return (
-                    <Markdown key={`${message.id}-${i}`}>{part.text}</Markdown>
-                  );
-                // case "tool-invocation":
-                //   return (
-                //     <pre key={`${message.id}-${i}`}>
-                //       {JSON.stringify(part.toolInvocation, null, 2)}
-                //     </pre>
-                //   );
+            <Markdown>{message.content}</Markdown>
+          </div>
+          <div>
+            {message.parts.map((part) => {
+              if (part.type === "tool-invocation") {
+                const { state, toolName } = part.toolInvocation;
+                if (state === "result") {
+                  if (toolName === "weather") {
+                    return (
+                      <WeatherBlock
+                        key={part.toolInvocation.toolCallId}
+                        {...part.toolInvocation.result}
+                      />
+                    );
+                  } else if (toolName === "linearIssues") {
+                    return (
+                      <Issues
+                        key={part.toolInvocation.toolCallId}
+                        issues={part.toolInvocation.result}
+                      />
+                    );
+                  }
+                }
               }
             })}
           </div>
